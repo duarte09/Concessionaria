@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Anúncio - AutoFictício</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+  <header>
+    <img src="images/camaruAzul.png" alt="logo loja" width="150">
+  </header>
+
+  <nav class="navbar navbar-expand-sm">
+    <a class="nav-link" href="login.html">Login</a>
+    <a class="nav-link" href="cadastro.html">Cadastro</a>
+    <a class="nav-link" href="detalheAnuncio.html">Detalhes Anuncio</a>
+    <a class="nav-link" href="interna.html">Area interna</a>
+    <a class="nav-link" href="criarAnuncio.html">Criar Anuncio</a>
+    <a class="nav-link" href="meusAnuncios.html">Anúncios</a>
+    <a class="nav-link" href="interesse.html">Deixei seu interesse</a>
+    <a class="nav-link" href="listagem.html">Area de interesse</a>
+  </nav>
+
+  <main class="container mt-4">
+    <h1>Criar Novo Anúncio</h1>
+    <form>
+      <div class="form-group">
+        <label for="marca">Marca do Veículo</label>
+        <input type="text" class="form-control" id="marca" placeholder="Ex: Ford, Chevrolet">
+      </div>
+      <div class="form-group">
+        <label for="modelo">Modelo</label>
+        <input type="text" class="form-control" id="modelo" placeholder="Ex: Focus, Camaro">
+      </div>
+      <div class="form-group">
+        <label for="ano">Ano de Fabricação</label>
+        <input type="number" class="form-control" id="ano" placeholder="Ex: 2018">
+      </div>
+      <div class="form-group">
+        <label for="cor">Cor</label>
+        <input type="text" class="form-control" id="cor" placeholder="Ex: Preto, Vermelho">
+      </div>
+      <div class="form-group">
+        <label for="km">Quilometragem</label>
+        <input type="number" class="form-control" id="km" placeholder="Ex: 50000 km">
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea class="form-control" id="descricao" rows="4"
+          placeholder="Informações adicionais do veículo"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="valor">Valor</label>
+        <input type="number" class="form-control" id="valor" placeholder="Ex: 50000">
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <select id="estado" class="form-control">
+          <option value="">Selecione o estado</option>
+          <option value="MG">Minas Gerais</option>
+          <option value="SP">São Paulo</option>
+          <option value="RJ">Rio de Janeiro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cidade">Cidade</label>
+        <input type="text" class="form-control" id="cidade" placeholder="Ex: Belo Horizonte, São Paulo">
+      </div>
+      <div class="form-group">
+        <label for="fotos">Fotos do Veículo (mínimo 3)</label>
+        <input type="file" class="form-control-file" id="fotos" multiple>
+      </div>
+      <button type="submit" class="btn btn-primary">Criar Anúncio</button>
+    </form>
+  </main>
+
+  <footer class="bg-dark text-light text-center p-3">
+    <p>&copy; 2024 AutoFictício - Todos os direitos reservados</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
