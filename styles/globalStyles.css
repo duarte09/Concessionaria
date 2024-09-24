@@ -69,12 +69,11 @@ hr {
 .header__logo {
     display: flex;
     align-items: center;
-
     margin-left: 5rem;
 }
 
 .header__logo img {
-    width: 4.5rem;
+    width: 9.5rem;
     margin-right: 1.5rem;
 }
 

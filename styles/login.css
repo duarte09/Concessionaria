@@ -105,22 +105,3 @@ footer {
     font-size: 14px;
 }
 
-@media (max-width: 768px) {
-    .loginContainer {
-        padding: 30px;
-    }
-}
-
-@media (max-width: 480px) {
-    .loginContainer {
-        padding: 20px;
-    }
-
-    .loginContainer__Title {
-        font-size: 20px;
-    }
-
-    .loginContainer__Form__Button {
-        font-size: 14px;
-    }
-}
