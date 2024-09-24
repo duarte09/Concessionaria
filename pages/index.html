@@ -11,39 +11,18 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="../styles/globalStyles.css" />
   <link rel="stylesheet" href="../styles/home.css" />
-  <link rel="stylesheet" href="../styles/navigation.css" />
 </head>
 
 <body>
-  <header class="header">
-    <div class="header__logo">
-      <a href="#"><img src="../images/camaruAzul.png" alt="logo loja"></a>
-      <p>AutoFictício</p>
-    </div>
-    <nav class="header__navigation">
-      <ul class="header__navigation__list">
-        <li class="header__navigation__list__item">
-          <a href="listagem.html">Área de Interesse</a>
-        </li>
-        </li>
-        <li class="header__navigation__list__item">
-          <a href="meusAnuncios.html">Meus Anúncios</a>
-        </li>
-        <li class="header__navigation__list__item">
-          <a href="criarAnuncio.html">Criar Anúncio</a>
-        </li>
-        <li class="header__navigation__list__item">
-          <a href="interna.html">Área interna</a>
-        </li>
-        <li class="header__navigation__list__item">
-          <a href="cadastro.html">Cadastro</a>
-        </li>
-        <li class="header__navigation__list__item header__navigation__list__item--highlight">
-          <a href="login.html">Login</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <div id="header"></div>
+
+  <script>
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header').innerHTML = data;
+      });
+  </script>
 
   <main>
     <div class="main-container">
@@ -88,8 +67,8 @@
           <div class="card-body">
             <h2 class="card-title">Ford Focus 2018</h2>
             <p class="card-location">Belo Horizonte - R$ 50.000</p>
-            <a href="detalheAnuncio.html" class="btn">Detalhes</a>
-            <a href="interesse.html" class="btn">Informe seu interesse</a>
+            <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
+            <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
           </div>
         </div>
         <div class="card">
@@ -97,8 +76,8 @@
           <div class="card-body">
             <h2 class="card-title">Chevrolet Camaro 2019</h2>
             <p class="card-location">São Paulo - R$ 150.000</p>
-            <a href="detalheAnuncio.html" class="btn">Detalhes</a>
-            <a href="interesse.html" class="btn">Informe seu interesse</a>
+            <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
+            <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
           </div>
         </div>
         <div class="card">
@@ -106,8 +85,8 @@
           <div class="card-body">
             <h2 class="card-title">Toyota Corolla 2020</h2>
             <p class="card-location">Rio de Janeiro - R$ 80.000</p>
-            <a href="detalheAnuncio.html" class="btn">Detalhes</a>
-            <a href="interesse.html" class="btn">Informe seu interesse</a>
+            <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
+            <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
           </div>
         </div>
       </div>

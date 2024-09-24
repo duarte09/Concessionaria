@@ -8,20 +8,22 @@
   <title>Login - AutoFictício</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles/globalStyles.css">
-  <link rel="stylesheet" href="../styles/login.css">
-  <link rel="stylesheet" href="../styles/navigation.css" />
+  <link rel="stylesheet" href="../../styles/globalStyles.css">
+  <link rel="stylesheet" href="../../styles/login.css">
 </head>
 
 <body class="loginBackground">
 
   <header class="header">
     <div class="header__logo">
-      <a href="#"><img src="../images/camaruAzul.png" alt="logo loja"></a>
+      <a href="#"><img src="../../images/camaruAzul.png" alt="logo loja"></a>
       <p>AutoFictício</p>
     </div>
     <nav class="header__navigation">
       <ul class="header__navigation__list">
+        <li class="header__navigation__list__item">
+          <a href="../index.html">Início</a>
+        </li>
         <li class="header__navigation__list__item header__navigation__list__item--highlight">
           <a href="cadastro.html">Cadastro</a>
         </li>
@@ -30,7 +32,7 @@
   </header>
 
   <main class="loginContainer">
-    <img src="../images/camaruAzul.png" alt="logo loja" width="150">
+    <img src="../../images/camaruAzul.png" alt="logo loja" width="250">
     <h1 class="loginContainer__Title">Concessionaria AutoFictício</h1>
     <form onsubmit="return redirectToRestricted()" enctype="multipart/form-data" method="post" name="login" id="loginForm" class="loginContainer__Form">
       <div class="loginContainer__Form__field">
