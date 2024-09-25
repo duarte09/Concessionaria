@@ -2,7 +2,7 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #f8f9fa;
+  background: #f8f9fa;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@ body, html {
 header {
   text-align: center;
   padding: 10px 0;
-  background-color: #fff;
+  background: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -20,7 +20,7 @@ header img {
 }
 
 nav {
-  background-color: #007bff;
+  background: #007bff;
   padding: 10px 0;
 }
 
@@ -38,7 +38,7 @@ nav {
 main.container {
   flex: 1;
   padding: 40px;
-  background-color: #fff;
+  background: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   margin: 20px auto;
@@ -56,28 +56,26 @@ h1 {
   color: #333;
 }
 
-.form-control, .form-control-file, .form-control:focus {
+.form-control, .form-control-file {
   border-radius: 5px;
-  border-color: #ced4da;
+  border: 1px solid #ced4da;
   box-shadow: none;
 }
 
 button.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
+  background: #007bff;
+  border: none;
   font-weight: bold;
   width: 100%;
   padding: 10px;
-  text-decoration: none;
 }
 
 button.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
+  background: #0056b3;
 }
 
 footer {
-  background-color: #333;
+  background: #333;
   color: #fff;
   padding: 15px 0;
   text-align: center;
@@ -87,6 +85,7 @@ footer {
   width: 100%;
 }
 
+/* Quebras de layout */
 @media (max-width: 768px) {
   main.container {
       padding: 30px;
@@ -108,6 +107,5 @@ footer {
 
   button.btn-primary {
       font-size: 14px;
-      text-decoration: none;
   }
 }

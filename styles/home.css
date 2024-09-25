@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 20px;
-    background-color: #f5f5f5;
+    background: #f5f5f5;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     min-height: 100vh;
@@ -13,7 +13,7 @@
 form {
     flex: 1;
     max-width: 400px;
-    background-color: #fff;
+    background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 20px;
@@ -28,30 +28,24 @@ form textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
 }
 
-/* Container de cartões */
+/* Container e estilos dos cartões */
 .card-container {
     display: flex;
-    flex-wrap: wrap;
     flex: 2;
-    justify-content: flex-start;
-    align-items: flex-start;
+    flex-wrap: wrap;
     margin-top: 0;
 }
 
-/* Estilos para os cartões */
 .card {
-    background-color: #fff;
+    flex: 1 1 calc(33% - 20px); /* 3 colunas em telas grandes */
+    background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 20px;
     margin: 10px;
-    width: calc(33% - 20px); /* 3 colunas em telas grandes */
     box-sizing: border-box;
-    flex: 1;
-    flex-shrink: 1;
 }
 
 .card:hover {
@@ -78,40 +72,40 @@ form textarea {
 
 /* Estilos para os botões */
 .btn {
-    width: 100%; 
+    width: 100%;
     padding: 10px;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     border-radius: 5px;
-    background-color: #007bff;
+    background: #007bff;
     color: #fff;
     border: none;
-    text-decoration: none;
-    text-align: center; 
+    text-align: center;
     transition: background-color 0.3s;
 }
 
 .btn:hover {
-    background-color: #0056b3;
-    text-decoration: none;
+    background: #0056b3;
 }
 
 /* Alinhamento dos botões dentro do card */
 .card-body {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Quebra de layout para telas médias */
+/* Quebra de layout para telas médias e pequenas */
 @media (max-width: 768px) {
     .card {
-        width: calc(50% - 20px); 
+        width: calc(50% - 20px);
+    }
+    .main-container {
+        padding: 0; /* Remove o padding lateral em telas pequenas */
     }
 }
 
-/* Quebra de layout para telas pequenas */
 @media (max-width: 480px) {
     .card {
-        width: 100%; 
+        width: 100%;
     }
 }
