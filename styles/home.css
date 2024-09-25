@@ -1,4 +1,3 @@
-/* Estilos principais da estrutura */
 .main-container {
     display: flex;
     justify-content: space-between;
@@ -12,12 +11,12 @@
 
 form {
     flex: 1;
-    max-width: 400px;
+    max-width: 300px; 
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    margin-right: 20px;
+    box-sizing: border-box;
 }
 
 form input,
@@ -30,22 +29,21 @@ form textarea {
     border-radius: 4px;
 }
 
-/* Container e estilos dos cartões */
 .card-container {
     display: flex;
     flex: 2;
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
+    width: 100%;
+    height: auto; 
     margin-top: 0;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .card {
-    flex: 1 1 calc(33% - 20px); /* 3 colunas em telas grandes */
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    padding: 20px;
     margin: 10px;
-    box-sizing: border-box;
+    flex: 1 1 calc(33.33% - 20px); 
+    min-width: 200px; 
 }
 
 .card:hover {
@@ -70,7 +68,6 @@ form textarea {
     margin-bottom: 15px;
 }
 
-/* Estilos para os botões */
 .btn {
     width: 100%;
     padding: 10px;
@@ -87,25 +84,8 @@ form textarea {
     background: #0056b3;
 }
 
-/* Alinhamento dos botões dentro do card */
 .card-body {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* Quebra de layout para telas médias e pequenas */
-@media (max-width: 768px) {
-    .card {
-        width: calc(50% - 20px);
-    }
-    .main-container {
-        padding: 0; /* Remove o padding lateral em telas pequenas */
-    }
-}
-
-@media (max-width: 480px) {
-    .card {
-        width: 100%;
-    }
 }

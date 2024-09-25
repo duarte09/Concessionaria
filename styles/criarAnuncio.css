@@ -17,7 +17,7 @@ h1 {
 }
 
 form .form-group {
-  margin-bottom: 20px; /* Aumenta a distância entre os campos */
+  margin-bottom: 20px;
 }
 
 form .form-group label {
@@ -25,8 +25,8 @@ form .form-group label {
   color: #333;
 }
 
-form .form-group input, 
-form .form-group select, 
+form .form-group input,
+form .form-group select,
 form .form-group textarea {
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -63,10 +63,14 @@ button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-footer {
-  background-color: #333;
-  color: white;
-  padding: 20px 0;
-  text-align: center;
-}
+/* Responsividade */
+@media (max-width: 600px) {
+  h1 {
+      font-size: 28px;
+  }
 
+  button[type="submit"] {
+      padding: 8px;
+      font-size: 16px;
+  }
+}

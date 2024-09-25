@@ -24,7 +24,7 @@ h1 {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
     font-size: 16px;
     width: 100%; 
-    max-width: 600px; /* Largura máxima do cartão */
+    max-width: 600px;
 }
 
 .card-img-top {
@@ -49,7 +49,7 @@ h1 {
 }
 
 .btn-voltar {
-    padding: 8px; /* Diminuindo o padding */
+    padding: 8px;
     border-radius: 5px;
     color: #fff;
     border: none;
@@ -63,14 +63,16 @@ h1 {
 }
 
 .btn-voltar:hover {
-    background: #0056b3; /* Cor ao passar o mouse */
+    background: #0056b3; 
 }
 
+/* Responsividade */
+@media (max-width: 600px) {
+    .card {
+        padding: 15px;
+    }
 
-footer {
-    margin-top: 20px; 
-    background-color: #333; 
-    color: #fff; 
-    padding: 15px; 
-    text-align: center; 
+    h1 {
+        font-size: 28px;
+    }
 }

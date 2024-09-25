@@ -36,7 +36,8 @@ h1 {
     margin-bottom: 5px;
 }
 
-.btn-voltar, .btn-danger {
+.btn-voltar,
+.btn-danger {
     padding: 10px;
     border-radius: 5px;
     color: #fff;

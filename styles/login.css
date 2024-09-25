@@ -50,14 +50,3 @@ html, body {
 .loginContainer__Form__Button:hover {
     background-color: #0056b3;
 }
-
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    font-size: 14px;
-}
