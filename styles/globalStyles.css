@@ -1,13 +1,11 @@
 :root {
     --background: #f7f7f7;
-
     --gray: #ececec;
     --white: hsl(0, 0%, 100%);
     --black: #1d1d1d;
     --light-dark: #383838;
     --blue: #3B5998;
     --light-blue: #52A1FF;
-
     --light-shadow: rgba(0,0,0,.2);
 }
 
@@ -20,8 +18,19 @@
 html {
     font-size: 62.5%;
     font-family: 'Poppins', sans-serif;
-
     background: var(--background);
+}
+
+body{
+    width: 100%;
+    padding: 2% 0;
+    margin: 0 auto;
+}
+
+@media (max-width: 480px){
+    body{
+        width: 95%;
+    }
 }
 
 button {
@@ -91,7 +100,6 @@ hr {
 .header__navigation__list {
     display: flex;
     align-items: center;
-
     list-style: none;
 }
 
