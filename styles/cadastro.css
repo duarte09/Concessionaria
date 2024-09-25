@@ -1,6 +1,6 @@
 html, body {
-    height: 100%; /* Define altura total para os elementos html e body */
-    margin: 0; /* Remove margens padrão */
+    height: 100%;
+    margin: 0;
 }
 
 .wrapper {
