@@ -13,17 +13,17 @@
   <link rel="stylesheet" href="../styles/home.css"/>
 </head>
 
+<div id="header"></div>
+
+<script>
+  fetch('../header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+    });
+</script>
+
 <body>
-  <div id="header"></div>
-
-  <script>
-    fetch('header.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('header').innerHTML = data;
-      });
-  </script>
-
   <main>
     <div class="main-container">
       <form class="mb-4">

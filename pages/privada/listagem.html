@@ -14,18 +14,17 @@
   <link rel="stylesheet" href="../../styles/listagem.css" />
 </head>
 
+<div id="header"></div>
+
+<script>
+  fetch('../header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+    });
+</script>
+
 <body>
-  <div id="header"></div>
-
-  <script>
-    fetch('../header.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('header').innerHTML = data;
-      });
-  </script>
-
-
   <main class="main-container">
     <h1>Interesses no Anúncio</h1>
     <div class="list-group">

@@ -126,9 +126,11 @@ hr {
     color: inherit;
 }
 
-.footer {
-    width: 100%;
-    background: var(--blue);
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
 }
 
 .footer div img {
