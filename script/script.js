@@ -8,7 +8,7 @@ function redirectToRestricted() {
     }
 
     if (email === "admin@mail.com" && password === "1234") {
-        window.location.href = "interna.html";
+        window.location.href = "../privada/interna.html";
     } else {
         alert("Credenciais inválidas. Tente novamente.");
     }

@@ -34,16 +34,22 @@
   <main class="loginContainer">
     <img src="../../images/camaruAzul.png" alt="logo loja" width="250">
     <h1 class="loginContainer__Title">Concessionaria AutoFictício</h1>
-    <form onsubmit="return redirectToRestricted()" enctype="multipart/form-data" method="post" name="login" id="loginForm" class="loginContainer__Form">
+
+    <form onsubmit="return redirectToRestricted()" enctype="multipart/form-data" method="post" name="login"
+      id="loginForm" class="loginContainer__Form">
+
       <div class="loginContainer__Form__field">
         <label for="email">E-mail</label>
         <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" name="email" required>
       </div>
+
       <div class="loginContainer__Form__field">
         <label for="senha">Senha</label>
         <input type="password" class="form-control" id="password" placeholder="Digite sua senha" name="senha" required>
       </div>
+
       <button type="submit" class="loginContainer__Form__Button">Entrar</button>
+      
     </form>
   </main>
 
@@ -55,7 +61,7 @@
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
     crossorigin="anonymous"></script>
 
-    <script src="/script/script.js"></script>
+  <script src="/script/script.js"></script>
 </body>
 
 </html>
