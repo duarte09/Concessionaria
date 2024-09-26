@@ -7,23 +7,22 @@
   <link rel="shortcut icon" href="../images/camaruAzul.png" type="image/png">
   <title>AutoFictício - Anúncios de Veículos</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="../../styles/globalStyles.css" />
-  <link rel="stylesheet" href="../../styles/meusAnuncios.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/globalStyles.css">
+  <link rel="stylesheet" href="../../styles/meusAnuncios.css">
 </head>
 
-<div id="header"></div>
-
-<script>
-  fetch('../header.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('header').innerHTML = data;
-    });
-</script>
-
 <body>
+  <div id="header"></div>
+
+  <script>
+    fetch('../header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header').innerHTML = data;
+      });
+  </script>
+
   <main class="main-container">
     <h1>Meus Anúncios</h1>
     <div class="card-container">
@@ -86,16 +85,17 @@
 
   <script src="/script/scriptInterno.js" defer></script>
 
+  <div id="footer"></div>
+
+  <script>
+    fetch('../footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      });
+  </script>
+
 </body>
 
-<div id="footer"></div>
-
-<script>
-  fetch('../footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer').innerHTML = data;
-    });
-</script>
 
 </html>
