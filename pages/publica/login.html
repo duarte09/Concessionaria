@@ -12,24 +12,17 @@
   <link rel="stylesheet" href="../../styles/login.css">
 </head>
 
-<body class="loginBackground">
+<div id="header"></div>
 
-  <header class="header">
-    <div class="header__logo">
-      <a href="#"><img src="../../images/camaruAzul.png" alt="logo loja"></a>
-      <p>AutoFictício</p>
-    </div>
-    <nav class="header__navigation">
-      <ul class="header__navigation__list">
-        <li class="header__navigation__list__item">
-          <a href="../index.html">Início</a>
-        </li>
-        <li class="header__navigation__list__item header__navigation__list__item--highlight">
-          <a href="cadastro.html">Cadastro</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+<script>
+  fetch('../headerPublic.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+    });
+</script>
+
+<body class="loginBackground">
 
   <main class="wrapper">
     <div class="loginContainer">
