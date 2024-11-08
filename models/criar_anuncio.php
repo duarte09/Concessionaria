@@ -30,7 +30,15 @@ class Anuncio
 
             // Efetiva as operações
             $pdo->commit();
-
         } 
+        catch (Exception $e) {
+            // Caso ocorra alguma falha nas operações da transação, a operação
+            // rollback irá desfazer as operações que eventualmente tenham sido feitas,
+            // voltando o BD ao estado em que se encontrava antes da chamada
+            // de beginTransaction.
+            $pdo->rollBack();
+            throw $e;
+          }
+      
     } 
 }
