@@ -25,7 +25,7 @@
 
   <main class="container mt-4">
     <h1>Criar Novo Anúncio</h1>
-    <form action="controlador_anuncio.php?acao=criarAnuncio" method="POST"></form>>
+    <form action="controlador_anuncio.php?acao=criarAnuncio" method="POST" enctype="multipart/form-data">
 
       <div class="form-group">
         <label for="marca">Marca do Veículo</label>
@@ -71,7 +71,7 @@
       </div>
       <div class="form-group">
         <label for="fotos">Fotos do Veículo (mínimo 3)</label>
-        <input type="file" class="form-control-file" id="fotos" name="fotos" multiple>
+        <input type="file" class="form-control-file" id="fotos" name="fotos" accept=".png, .jpeg" multiple>
       </div>
       <button type="submit" class="btn btn-primary">Criar Anúncio</button>
     </form>
