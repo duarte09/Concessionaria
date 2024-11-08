@@ -7,7 +7,7 @@ CREATE TABLE anunciante (
     nome VARCHAR(100) NOT NULL,
     cpf VARCHAR(11) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    senhahash VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
     telefone VARCHAR(15) NOT NULL
 );
 
@@ -18,11 +18,10 @@ CREATE TABLE anuncio (
     modelo VARCHAR(50),
     ano INT NOT NULL,
     cor VARCHAR(20),
-    quilometragem INT,
+    km INT,
     descricao TEXT,
-    localizacao VARCHAR(50),
     valor DECIMAL(10, 2),
-    datahora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    datahora TIMESTAMP DEFAULT NOW(),
     estado VARCHAR(2) NOT NULL,
     cidade VARCHAR(100) NOT NULL,
     idanunciante INT NOT NULL,
@@ -34,7 +33,7 @@ CREATE TABLE interesse (
     nome VARCHAR(100) NOT NULL,
     telefone VARCHAR(15),
     mensagem TEXT,
-    datahora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    datahora TIMESTAMP DEFAULT NOW(),
     idanuncio INT NOT NULL,
     FOREIGN KEY (idanuncio) REFERENCES anuncio(id)
 );
