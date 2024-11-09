@@ -3,6 +3,18 @@ session_start();
 require "../conexaoMysql.php";
 require "../models/anunciante.php";
 
+class LoginResult
+{
+  public $success;
+  public $newLocation;
+
+  function __construct($success, $newLocation)
+  {
+    $this->success = $success;
+    $this->newLocation = $newLocation;
+  }
+}
+
 // resgata a ação a ser executada
 $acao = $_GET['acao'];
 
@@ -19,8 +31,14 @@ switch ($acao) {
 
         $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
-        Anunciante::Create($pdo, $nome, $cpf, 
-        $email, $senhaHash, $telefone);
+        Anunciante::Create(
+            $pdo,
+            $nome,
+            $cpf,
+            $email,
+            $senhaHash,
+            $telefone
+        );
         echo json_encode(["success" => true]);
         break;
 
@@ -28,6 +46,7 @@ switch ($acao) {
         $email = $_POST["email"] ?? '';
         $senha = $_POST["senha"] ?? '';
 
+        /*
         $anunciante = Anunciante::findByEmail($pdo, $email);
 
         if ($anunciante && password_verify($senha, $anunciante->senhaHash)) {
@@ -36,6 +55,27 @@ switch ($acao) {
         } else {
             echo json_encode(["success" => false, "message" => "Credenciais inválidas"]);
         }
+        break;*/
+
+        if (checkUserCredentials($pdo, $email, $senha)) {
+            // Define o parâmetro 'httponly' para o cookie de sessão, para que o cookie
+            // possa ser acessado apenas pelo navegador nas requisições http (e não por código JavaScript).
+            // Aumenta a segurança evitando que o cookie de sessão seja roubado por eventual
+            // código JavaScript proveniente de ataq. X S S.
+            $cookieParams = session_get_cookie_params();
+            $cookieParams['httponly'] = true;
+            session_set_cookie_params($cookieParams);
+
+            session_start();
+            $_SESSION['loggedIn'] = true;
+            $_SESSION['user'] = $email;
+            $response = new LoginResult(true, 'home.php');
+        } else
+            $response = new LoginResult(false, '');
+
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($response);
+
         break;
 
     case "logout":
@@ -47,3 +87,5 @@ switch ($acao) {
         echo json_encode(["error" => "Ação não disponível"]);
         break;
 }
+
+

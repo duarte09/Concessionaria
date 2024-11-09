@@ -23,7 +23,6 @@ class Anunciante
 
     function checkUserCredentials($pdo, $email, $senha)
     {
-
         $sql = <<<SQL
             SELECT senhaHash 
             FROM anunciante
