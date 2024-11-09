@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "../conexaoMysql.php";
-require "anunciante.php";
+require "../models/anunciante.php";
 
 // resgata a ação a ser executada
 $acao = $_GET['acao'];

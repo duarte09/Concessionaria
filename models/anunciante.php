@@ -2,13 +2,19 @@
 
 class Anunciante
 {
-    static function Create($pdo,
-     $nome, $cpf, $email, $senhaHash, $telefone)
-
-    {
+    static function Create(
+        $pdo,
+        $nome,
+        $cpf,
+        $email,
+        $senhaHash,
+        $telefone
+    ) {
         $stmt = $pdo->prepare(
-            "INSERT INTO anunciante (nome, cpf, email, senhaHash, telefone) 
-            VALUES (?, ?, ?, ?, ?)"
+            <<<SQL
+            INSERT INTO anunciante (nome, cpf, email, senhaHash, telefone) 
+            VALUES (?, ?, ?, ?, ?)
+            SQL
         );
 
         $stmt->execute([$nome, $cpf, $email, $senhaHash, $telefone]);
@@ -16,17 +22,26 @@ class Anunciante
         return $pdo->lastInsertId();  // Retorna o ID do novo anunciante
     }
 
-    public static function verifyLogin($pdo, $email, $senhaFornecida)
+    static function verifyLogin($pdo, $email, $senhaFornecida)
     {
-    $stmt = $pdo->prepare("SELECT senhaHash FROM anunciante WHERE email = ?");
-    $stmt->execute([$email]);
+        $email = $_GET['email'] ?? "";
 
-    if ($stmt->rowCount() == 0) return false; // E-mail não encontrado
+        $sql = <<<SQL
+            SELECT senhaHash 
+            FROM anunciante
+            WHERE email = ?
+        SQL;
 
-    $senhaHash = $stmt->fetchColumn();
+        $stmt = $pdo->prepare;
+        $stmt->execute([$email]);
 
-    // Verifica se a senha fornecida corresponde ao hash armazenado
-    return password_verify($senhaFornecida, $senhaHash);
+        if ($stmt->rowCount() == 0)
+            return false; // E-mail não encontrado
+
+        $senhaHash = $stmt->fetchColumn();
+
+        // Verifica se a senha fornecida corresponde ao hash armazenado
+        return password_verify($senhaFornecida, $senhaHash);
     }
 
 }
