@@ -58,7 +58,7 @@ switch ($acao) {
 
          // extensão vai pegar se é jpeg ou png para colocar no fim do nome na pasta images
          $extensao = substr($tipoArquivoImagem, 6);
-         $pastaDestino = "$pasta/{$dataHora}-{$microtime}.{$extensao}";
+         $pastaDestino = "$pasta/{$dataHora}-{$microtime}.{$extensao}"; 
 
          // move o arquivo temporário para a pasta/nome final
          if (move_uploaded_file($arquivoImagemTemp, $pastaDestino)) {
