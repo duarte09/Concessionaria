@@ -10,8 +10,7 @@ class Anunciante
         $senhaHash,
         $telefone
     ) {
-        $stmt = $pdo->prepare(
-            <<<SQL
+        $stmt = $pdo->prepare(<<<SQL
             INSERT INTO anunciante (nome, cpf, email, senhaHash, telefone) 
             VALUES (?, ?, ?, ?, ?)
             SQL
@@ -22,26 +21,30 @@ class Anunciante
         return $pdo->lastInsertId();  // Retorna o ID do novo anunciante
     }
 
-    static function verifyLogin($pdo, $email, $senhaFornecida)
+    function checkUserCredentials($pdo, $email, $senha)
     {
-        $email = $_GET['email'] ?? "";
 
         $sql = <<<SQL
             SELECT senhaHash 
             FROM anunciante
             WHERE email = ?
-        SQL;
+            SQL;
 
-        $stmt = $pdo->prepare;
-        $stmt->execute([$email]);
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$email]);
+            $senhaHash = $stmt->fetchColumn();
 
-        if ($stmt->rowCount() == 0)
-            return false; // E-mail não encontrado
+            if (!$senhaHash)
+                return false; // a consulta não retornou nenhum resultado (email não encontrado)
 
-        $senhaHash = $stmt->fetchColumn();
+            if (!password_verify($senha, $senhaHash))
+                return false; // email e/ou senha incorreta
 
-        // Verifica se a senha fornecida corresponde ao hash armazenado
-        return password_verify($senhaFornecida, $senhaHash);
+            return true;
+        } catch (Exception $e) {
+            exit('Falha inesperada: ' . $e->getMessage());
+        }
     }
 
 }
