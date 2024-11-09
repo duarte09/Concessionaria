@@ -1,7 +1,10 @@
 <?php
+
 class Anunciante
 {
-    public static function Create($pdo, $nome, $cpf, $email, $senhaHash, $telefone)
+    static function Create($pdo,
+     $nome, $cpf, $email, $senhaHash, $telefone)
+
     {
         $stmt = $pdo->prepare(
             "INSERT INTO anunciante (nome, cpf, email, senhaHash, telefone) 
@@ -27,4 +30,3 @@ class Anunciante
     }
 
 }
-?>

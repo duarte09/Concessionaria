@@ -18,15 +18,17 @@ class Anuncio
             );
             $stmt1->execute([ $marca, $modelo, $ano, $cor, $km, $descricao, $valor,$estado, $cidade]);
 
-            $idNovoCliente = $pdo->lastInsertId();
+            // O id do novo cliente gerado automaticamente na inserção anterior 
+            // é resgatado por meio do método lastInsertId().
+            $idNovoAnuncio = $pdo->lastInsertId();
 
             $stmt2 = $pdo->prepare(
                 <<<SQL
-                INSERT INTO foto (nomearqfoto)
-                VALUES (?)
+                INSERT INTO foto (idanuncio, nomearqfoto)
+                VALUES (?,?)
                 SQL
             );
-            $stmt2->execute([$nomearqfoto]);
+            $stmt2->execute([$idNovoAnuncio, $nomearqfoto]);
 
             // Efetiva as operações
             $pdo->commit();

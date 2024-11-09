@@ -20,4 +20,3 @@ function mysqlConnect()
     exit('Ocorreu uma falha na conexão com o MySQL: ' . $e->getMessage());
   }
 }
-?>

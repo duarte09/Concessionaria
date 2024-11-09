@@ -29,26 +29,26 @@
   <main class="wrapper">
     <div class="container">
       <h1>Cadastro de Usuário</h1>
-      <form>
+      <form action="controlador_anunciante.php?acao=cadastrarAnunciante">
         <div class="form-group">
           <label for="nome">Nome</label>
-          <input type="text" class="form-control" id="nome" placeholder="Seu nome" required>
+          <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome" required>
         </div>
         <div class="form-group">
           <label for="cpf">CPF</label>
-          <input type="text" class="form-control" id="cpf" placeholder="Seu CPF" required>
+          <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Seu CPF" required>
         </div>
         <div class="form-group">
           <label for="email">E-mail</label>
-          <input type="email" class="form-control" id="email" placeholder="Seu e-mail" required>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Seu e-mail" required>
         </div>
         <div class="form-group">
           <label for="senha">Senha</label>
-          <input type="password" class="form-control" id="senha" placeholder="Crie uma senha" required>
+          <input type="password" class="form-control" id="senha" name="senha" placeholder="Crie uma senha" required>
         </div>
         <div class="form-group">
           <label for="telefone">Telefone</label>
-          <input type="tel" class="form-control" id="telefone" placeholder="Seu telefone" required>
+          <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Seu telefone" required>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
       </form>
