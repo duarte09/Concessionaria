@@ -1,6 +1,6 @@
-CREATE DATABASE autoficticio;
+/*CREATE DATABASE autoficticio;*/
 
-USE autoficticio;
+/*USE autoficticio;*/
 
 CREATE TABLE anunciante (
     id INT PRIMARY KEY AUTO_INCREMENT,
