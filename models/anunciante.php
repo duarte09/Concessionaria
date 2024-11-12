@@ -11,7 +11,7 @@ class Anunciante
         $telefone
     ) {
         $stmt = $pdo->prepare(<<<SQL
-            INSERT INTO anunciante (nome, cpf, email, senhaHash, telefone) 
+            INSERT INTO anunciante (nome, cpf, email, senha, telefone) 
             VALUES (?, ?, ?, ?, ?)
             SQL
         );
