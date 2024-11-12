@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/camaruAzul.png" type="image/png">
+    <title>AutoFictício - Anúncios de Veículos</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/globalStyles.css" />
+    <link rel="stylesheet" href="../styles/home.css" />
+</head>
+
+<body>
+    <div id="header"></div>
+    <script>
+        fetch('/pages/headerPublic.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+    </script>
+
+    <main>
+        <div class="main-container">
+            <form class="mb-4">
+                <h1>Encontre o Veículo Perfeito</h1>
+                <div class="form-row">
+
+
+                    <div class="form-group col-md-4">
+                        <label for="marca">Marca</label>
+                        <select id="marca" class="form-control">
+                            <option value="">Selecione</option>
+                            <!--
+                      <option value="ford">Ford</option>
+                      <option value="chevrolet">Chevrolet</option>
+                      <option value="toyota">Toyota</option>
+                    -->
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="modelo">Modelo</label>
+                        <select id="modelo" class="form-control">
+                            <option value="">Selecione</option>
+                            <!--
+                      <option value="focus">Focus</option>
+                      <option value="camaro">Camaro</option>
+                      <option value="corolla">Corolla</option>
+                    -->
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="localizacao">Localização</label>
+                        <select id="localizacao" class="form-control">
+                            <option value="">Selecione</option>
+                            <!--
+                      <option value="bh">Belo Horizonte</option>
+                      <option value="sp">São Paulo</option>
+                      <option value="rj">Rio de Janeiro</option>
+                      -->
+                        </select>
+                    </div>
+
+                </div>
+                <button type="submit" class="btn" onclick="buscarVeiculos()">Buscar</button>
+            </form>
+
+            <div class="card-container">
+                <div id="containerVeiculos" class="row">
+                    <!-- Os cards serão adicionados aqui -->
+                </div>
+                <!--
+                <div class="card">
+                    <img src="../images/car1.jpg" class="card-img-top" alt="Carro 1">
+                    <div class="card-body">
+                        <h3 class="card-title">Ford Focus 2018</h3>
+                        <p class="card-location">Belo Horizonte - R$ 50.000</p>
+                        <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
+                        <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../images/car2.jpg" class="card-img-top" alt="Carro 2">
+                    <div class="card-body">
+                        <h2 class="card-title">Chevrolet Camaro 2019</h2>
+                        <p class="card-location">São Paulo - R$ 150.000</p>
+                        <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
+                        <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../images/car3.jpg" class="card-img-top" alt="Carro 3">
+                    <div class="card-body">
+                        <h2 class="card-title">Toyota Corolla 2020</h2>
+                        <p class="card-location">Rio de Janeiro - R$ 80.000</p>
+                        <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
+                        <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
+                    </div>
+                </div>
+            -->
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <div id="footer"></div>
+    <script>
+        fetch('/pages/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+
+        // Função para carregar as marcas distintas do banco de dados
+        function carregaMarcasDistintas() {
+            // Cria uma nova requisição AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/models/criar_anuncio.php?func=GetMarcas', true); // Configura o método GET para chamar a função GetMarcas no PHP
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            // Função que será executada quando a resposta da requisição for recebida
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) { // Verifica se a resposta foi bem-sucedida
+                    var marcas = JSON.parse(xhr.responseText); // Converte a resposta JSON em um array de marcas
+
+                    var selectMarca = document.getElementById('selectMarca'); // Obtém o elemento <select> de marcas
+                    selectMarca.innerHTML = '<option value="">Selecione</option>'; // Reseta as opções do <select>
+
+                    // Adiciona cada marca como uma opção no <select>
+                    marcas.forEach(function (marca) {
+                        var option = document.createElement('option');
+                        option.value = marca;
+                        option.textContent = marca;
+                        selectMarca.appendChild(option);
+                    });
+                } else {
+                    alert('Erro ao carregar marcas.'); // Exibe um alerta em caso de erro na resposta
+                }
+            };
+
+            // Função para tratar erros na requisição (ex.: problemas de conexão)
+            xhr.onerror = function () {
+                alert('Erro na requisição.');
+            };
+
+            xhr.send(); // Envia a requisição ao servidor
+        }
+
+        // Função para carregar os modelos da marca selecionada
+        function carregaModelosDaMarca() {
+            var selectMarca = document.getElementById('selectMarca');
+            var marcaSelecionada = selectMarca.value; // Obtém a marca selecionada no <select>
+
+            if (marcaSelecionada) { // Verifica se uma marca foi selecionada
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', `/models/criar_anuncio.php?func=GetModelos&marca=${encodeURIComponent(marcaSelecionada)}`, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        var modelos = JSON.parse(xhr.responseText); // Converte a resposta JSON em um array de modelos
+
+                        var selectModelo = document.getElementById('selectModelo'); // Obtém o elemento <select> de modelos
+                        selectModelo.innerHTML = '<option value="">Selecione</option>'; // Reseta as opções do <select>
+
+                        // Adiciona cada modelo como uma opção no <select>
+                        modelos.forEach(function (modelo) {
+                            var option = document.createElement('option');
+                            option.value = modelo;
+                            option.textContent = modelo;
+                            selectModelo.appendChild(option);
+                        });
+                    } else {
+                        alert('Erro ao carregar modelos.');
+                    }
+                };
+
+                xhr.onerror = function () {
+                    alert('Erro na requisição.');
+                };
+
+                xhr.send(); // Envia a requisição ao servidor
+            }
+        }
+
+        // Função para carregar as localizações disponíveis
+        function carregaLocalizacoes() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/models/criar_anuncio.php?func=GetLocalizacoes', true); // Configura o método GET para chamar a função GetLocalizacoes no PHP
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    var localizacoes = JSON.parse(xhr.responseText); // Converte a resposta JSON em um array de localizações
+
+                    var selectLocalizacao = document.getElementById('selectLocalizacao'); // Obtém o elemento <select> de localizações
+                    selectLocalizacao.innerHTML = '<option value="">Selecione</option>'; // Reseta as opções do <select>
+
+                    // Adiciona cada localização como uma opção no <select>
+                    localizacoes.forEach(function (localizacao) {
+                        var option = document.createElement('option');
+                        option.value = localizacao;
+                        option.textContent = localizacao;
+                        selectLocalizacao.appendChild(option);
+                    });
+                } else {
+                    alert('Erro ao carregar localizações.');
+                }
+            };
+
+            xhr.onerror = function () {
+                alert('Erro na requisição.');
+            };
+
+            xhr.send(); // Envia a requisição ao servidor
+        }
+
+        // Função para buscar veículos com base nos filtros selecionados: marca, modelo e localização
+        function buscarVeiculos() {
+            // Obtém os valores dos <select> de marca, modelo e localização
+            var marca = document.getElementById('selectMarca').value;
+            var modelo = document.getElementById('selectModelo').value;
+            var localizacao = document.getElementById('selectLocalizacao').value;
+
+            var xhr = new XMLHttpRequest();
+            // Configura a requisição GET, incluindo os parâmetros de marca, modelo e localização na URL
+            xhr.open('GET', `/models/criar_anuncio.php?func=GetVeiculos&marca=${encodeURIComponent(marca)}&modelo=${encodeURIComponent(modelo)}&localizacao=${encodeURIComponent(localizacao)}`, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    var veiculos = JSON.parse(xhr.responseText); // Converte a resposta JSON em um array de veículos
+
+                    var containerVeiculos = document.getElementById('containerVeiculos'); // Obtém o container onde os veículos serão exibidos
+                    containerVeiculos.innerHTML = ''; // Limpa o conteúdo do container
+
+                    // Para cada veículo encontrado, cria um card com as informações
+                    veiculos.forEach(function (veiculo) {
+                        var cardDiv = document.createElement('div');
+                        cardDiv.classList.add('card'); // Adiciona a classe 'card' para estilização
+
+                        var img = document.createElement('img');
+                        img.src = veiculo.imagem || "../images/car2.jpg"; // Define a imagem do veículo, se disponível
+                        img.classList.add('card-img-top');
+                        img.alt = 'Foto do veículo';
+                        cardDiv.appendChild(img);
+
+                        var cardBody = document.createElement('div');
+                        cardBody.classList.add('card-body');
+
+                        var cardTitle = document.createElement('h5');
+                        cardTitle.classList.add('card-title');
+                        cardTitle.textContent = `${veiculo.marca} ${veiculo.modelo} ${veiculo.ano}`;
+                        cardBody.appendChild(cardTitle);
+
+                        var cardTextCor = document.createElement('p');
+                        cardTextCor.classList.add('card-text');
+                        cardTextCor.innerHTML = `<strong>Cor:</strong> ${veiculo.cor}`;
+                        cardBody.appendChild(cardTextCor);
+
+                        var cardTextKm = document.createElement('p');
+                        cardTextKm.classList.add('card-text');
+                        cardTextKm.innerHTML = `<strong>Quilometragem:</strong> ${veiculo.quilometragem} km`;
+                        cardBody.appendChild(cardTextKm);
+
+                        cardDiv.appendChild(cardBody);
+                        containerVeiculos.appendChild(cardDiv); // Adiciona o card ao container de veículos
+                    });
+                } else {
+                    alert('Erro ao carregar veículos.');
+                }
+            };
+
+            xhr.onerror = function () {
+                alert('Erro na requisição.');
+            };
+
+            xhr.send(); // Envia a requisição ao servidor
+        }
+
+        // Carrega as marcas e localizações assim que a página é carregada
+        document.addEventListener("DOMContentLoaded", function () {
+            carregaMarcasDistintas(); // Carrega as marcas disponíveis
+            carregaLocalizacoes(); // Carrega as localizações disponíveis
+        });
+
+
+
+    </script>
+</body>
+
+</html>
