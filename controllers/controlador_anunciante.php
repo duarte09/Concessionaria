@@ -39,7 +39,7 @@ switch ($acao) {
             $senhaHash,
             $telefone
         );
-        echo json_encode(["success" => true]);
+        header('Location: ../index.html');
         break;
 
     case "login":
@@ -50,17 +50,20 @@ switch ($acao) {
         $credenciaisValidas = $anunciante->checkUserCredentials($pdo, $email, $senha);
         
         if($credenciaisValidas){
+            $cookieParams = session_get_cookie_params();
+            $cookieParams['httponly'] = true;
+            session_set_cookie_params($cookieParams);
+            
             session_start();
             $_SESSION['loggedIn'] = true;
             $_SESSION['user'] = $email;
-
-            header('Location: ../pages/privada/interna.html');
-            exit();
-        } else {
-            // Credenciais inválidas, redireciona para a página de login com erro
-            header('Location: login.html?erro=1');
-            exit();
-        }
+            $response = new LoginResult(true, '../pages/privada/interna.html');
+          } 
+          else
+            $response = new LoginResult(false, ''); 
+          
+          header('Content-Type: application/json; charset=utf-8');
+          echo json_encode($response);
         break;
         
         /*
@@ -102,7 +105,7 @@ switch ($acao) {
         exit();
         break;
 
-        default:
+    default:
         echo json_encode(["error" => "Ação não disponível"]);
         break;
         

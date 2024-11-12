@@ -67,7 +67,7 @@ switch ($acao) {
 
          // Insere na tabela
          Anuncio::CreateAnuncio($pdo, $marca, $modelo, $ano, $cor, $km, $descricao, $valor, $estado, $cidade, $nomearqfoto);
-         header("location: ../pages/publica/criarAnuncio.html");
+         header("location: ../pages/privada/interna.html");
 
       } catch (Exception $e) {
          throw new Exception($e->getMessage());
