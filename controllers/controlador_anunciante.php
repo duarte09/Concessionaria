@@ -23,11 +23,11 @@ $pdo = mysqlConnect();
 switch ($acao) {
 
     case "cadastrarAnunciante":
-        $nome = $_POST["nome"] ?? '';
-        $cpf = $_POST["cpf"] ?? '';
-        $email = $_POST["email"] ?? '';
-        $senha = $_POST["senha"] ?? '';
-        $telefone = $_POST["telefone"] ?? '';
+        $nome = htmlspecialchars($_POST["nome"] ?? '');
+        $cpf = htmlspecialchars($_POST["cpf"] ?? '');
+        $email = htmlspecialchars($_POST["email"] ?? '');
+        $senha = htmlspecialchars($_POST["senha"] ?? '');
+        $telefone = htmlspecialchars($_POST["telefone"] ?? '');
 
         $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 

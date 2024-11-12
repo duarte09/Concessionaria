@@ -25,49 +25,49 @@ function validaFoto($arquivoImagem)
    return $imageType;
 }
 
-// resgata a ação a ser executada
+// Resgata a ação a ser executada
 $acao = $_GET['acao'];
 
-// conecta ao servidor do MySQL
+// Conecta ao servidor do MySQL
 $pdo = mysqlConnect();
 
 switch ($acao) {
 
    case "criarAnuncio":
-      $marca = $_POST["marca"] ?? "";
-      $modelo = $_POST["modelo"] ?? "";
-      $ano = $_POST["ano"] ?? "";
-      $cor = $_POST["cor"] ?? "";
-      $km = $_POST["km"] ?? "";
-      $descricao = $_POST["descricao"] ?? "";
-      $valor = $_POST["valor"] ?? "";
-      $estado = $_POST["estado"] ?? "";
-      $cidade = $_POST["cidade"] ?? "";
+      $marca = htmlspecialchars($_POST["marca"] ?? "");
+      $modelo = htmlspecialchars($_POST["modelo"] ?? "");
+      $ano = htmlspecialchars($_POST["ano"] ?? "");
+      $cor = htmlspecialchars($_POST["cor"] ?? "");
+      $km = htmlspecialchars($_POST["km"] ?? "");
+      $descricao = htmlspecialchars($_POST["descricao"] ?? "");
+      $valor = htmlspecialchars($_POST["valor"] ?? "");
+      $estado = htmlspecialchars($_POST["estado"] ?? "");
+      $cidade = htmlspecialchars($_POST["cidade"] ?? "");
 
-      // resgata o arquivo enviado no formulário (como arquivo temporário)
+      // Resgata o arquivo enviado no formulário (como arquivo temporário)
       $arquivoImagemTemp = $_FILES["fotos"]["tmp_name"] ?? "";
 
-      // dados para compor o nome final do arquivo
+      // Dados para compor o nome final do arquivo
       $pasta = "images";
       $dataHora = date('Ymd_His', timestamp: time());
       $microtime = microtime(true);
 
       try {
-         // chamar funcao
+         // Chama a função de validação da foto
          $tipoArquivoImagem = validaFoto($arquivoImagemTemp);
 
-         // extensão vai pegar se é jpeg ou png para colocar no fim do nome na pasta images
+         // Extensão do arquivo (jpeg ou png)
          $extensao = substr($tipoArquivoImagem, 6);
          $pastaDestino = "$pasta/{$dataHora}-{$microtime}.{$extensao}"; 
 
-         // move o arquivo temporário para a pasta/nome final
+         // Move o arquivo temporário para a pasta/nome final
          if (move_uploaded_file($arquivoImagemTemp, $pastaDestino)) {
             $nomearqfoto = $pastaDestino;
          }
 
-         // inserir na tabela
+         // Insere na tabela
          Anuncio::CreateAnuncio($pdo, $marca, $modelo, $ano, $cor, $km, $descricao, $valor, $estado, $cidade, $nomearqfoto);
-         header("location: ../pages/publica/criarAnuncio.html"); // ARRUMAR AQUI
+         header("location: ../pages/publica/criarAnuncio.html");
 
       } catch (Exception $e) {
          throw new Exception($e->getMessage());
@@ -75,32 +75,30 @@ switch ($acao) {
       break;
 
    case "listarAnuncios":
-      
-      try{   
+      try {   
          $arrayAnuncio = Anuncio::CreateListar30($pdo);
          header('Content-Type: application/json; charset=utf-8');
-         echo json_encode($arrayClientes);
+         echo json_encode($arrayAnuncio);
       } catch (Exception $e) {
          throw new Exception($e->getMessage());
       }
       break;
 
-   case "criarAnuncio":
+   case "criarInteresse":
+      try {
          $nome = $_POST["nome"] ?? "";
          $telefone = $_POST["telefone"] ?? "";
          $mensagem = $_POST["mensagem"] ?? "";
 
-         // inserir na tabela
+         // Insere na tabela de interesses
          Interesse::CreateInteresse($pdo, $nome, $telefone, $mensagem);
 
          header("location: ../pages/index.html");
-   
-         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
-         }
-         break;
+      } catch (Exception $e) {
+         throw new Exception($e->getMessage());
+      }
+      break;
 
-      //-----------------------------------------------------------------
    default:
       exit("Ação não disponível");
 }

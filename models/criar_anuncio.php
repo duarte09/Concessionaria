@@ -2,13 +2,6 @@
 
 class Anuncio
 {
-    if (!isset($_GET['func'])) {
-        http_response_code(400); // Bad Request
-        echo json_encode(['error' => 'Parâmetro "func" é obrigatório']);
-        exit;
-    }
-    
-
     static function CreateAnuncio($pdo,
         $marca, $modelo, $ano, $cor, $km, $descricao, $valor,
         $estado, $cidade, $nomearqfoto, $idanunciante)
@@ -208,6 +201,5 @@ switch ($func) {
         http_response_code(400); // Bad Request
         echo json_encode(['error' => $e->getMessage()]);
     }
-}
 ?>
 
