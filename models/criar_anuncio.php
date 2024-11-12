@@ -2,18 +2,21 @@
 
 class Anuncio
 {
-    static function Create($pdo,
+    static function CreateAnuncio($pdo,
         $marca, $modelo, $ano, $cor, $km, $descricao, $valor,
         $estado, $cidade, $nomearqfoto)
 
     {
         try {
             $pdo->beginTransaction();
+            // O campo DataHora da tabela anuncio deve ser utilizado para armazenar a data e a hora em que o
+            // anúncio foi criado. Essa informação não deve ser solicitada ao usuário (pode-se utilizar a função now()
+            // do MySQL).
 
             $stmt1 = $pdo->prepare(
                 <<<SQL
-                INSERT INTO anuncio (marca, modelo, ano, cor, km, descricao, valor, estado, cidade)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO anuncio (marca, modelo, ano, cor, km, descricao, valor, estado, cidade, datahora)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
                 SQL
             );
             $stmt1->execute([ $marca, $modelo, $ano, $cor, $km, $descricao, $valor,$estado, $cidade]);
@@ -42,5 +45,22 @@ class Anuncio
             throw $e;
           }
       
-    } 
+    }
+    
+    static function CreateListar30($pdo)
+    {
+    
+    $stmt = $pdo->query(
+        <<<SQL
+        SELECT anuncio.id, marca, modelo, ano, cor, km, descricao, valor, estado, cidade, nomearqfoto
+        FROM anuncio 
+        LEFT JOIN foto ON anuncio.id = foto.idanuncio
+        LIMIT 30
+        SQL
+    );
+
+    // Resgata os dados dos anúncios como um array de objetos
+    $arrayAnuncios = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $arrayAnuncios;
+    }
 }
