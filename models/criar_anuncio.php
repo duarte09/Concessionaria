@@ -3,8 +3,8 @@
 class Anuncio
 {
     static function CreateAnuncio($pdo,
-        $marca, $modelo, $ano, $cor, $km, $descricao, $valor, $datahora,
-        $estado, $cidade, $nomearqfoto)
+        $marca, $modelo, $ano, $cor, $km, $descricao, $valor,
+        $estado, $cidade, $nomearqfoto, $idanunciante)
 
     {
         try {
@@ -15,11 +15,11 @@ class Anuncio
 
             $stmt1 = $pdo->prepare(
                 <<<SQL
-                INSERT INTO anuncio (marca, modelo, ano, cor, km, descricao, valor, datahora, estado, cidade)
+                INSERT INTO anuncio (marca, modelo, ano, cor, km, descricao, valor, estado, cidade, idanunciante)
                 VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)
                 SQL
             );
-            $stmt1->execute([ $marca, $modelo, $ano, $cor, $km, $descricao, $valor, $datahora, $estado, $cidade]);
+            $stmt1->execute([ $marca, $modelo, $ano, $cor, $km, $descricao, $valor, $estado, $cidade, $idanunciante]);
 
             // O id do novo cliente gerado automaticamente na inserção anterior 
             // é resgatado por meio do método lastInsertId().

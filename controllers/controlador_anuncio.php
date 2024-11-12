@@ -49,7 +49,7 @@ switch ($acao) {
 
       // dados para compor o nome final do arquivo
       $pasta = "images";
-      //$dataHora = date('Ymd_His', timestamp: time());
+      $dataHora = date('Ymd_His', timestamp: time());
       $microtime = microtime(true);
 
       try {
@@ -58,8 +58,7 @@ switch ($acao) {
 
          // extensão vai pegar se é jpeg ou png para colocar no fim do nome na pasta images
          $extensao = substr($tipoArquivoImagem, 6);
-         $pastaDestino = "$pasta/{$microtime}.{$extensao}"; 
-         //$pastaDestino = "$pasta/{$dataHora}-{$microtime}.{$extensao}"; 
+         $pastaDestino = "$pasta/{$dataHora}-{$microtime}.{$extensao}"; 
 
          // move o arquivo temporário para a pasta/nome final
          if (move_uploaded_file($arquivoImagemTemp, $pastaDestino)) {
@@ -67,7 +66,7 @@ switch ($acao) {
          }
 
          // inserir na tabela
-         Anuncio::CreateAnuncio($pdo, $marca, $modelo, $ano, $cor, $km, $descricao, $valor, $datahora, $estado, $cidade, $nomearqfoto);
+         Anuncio::CreateAnuncio($pdo, $marca, $modelo, $ano, $cor, $km, $descricao, $valor, $estado, $cidade, $nomearqfoto);
          header("location: ../pages/publica/criarAnuncio.html"); // ARRUMAR AQUI
 
       } catch (Exception $e) {
@@ -76,7 +75,7 @@ switch ($acao) {
       break;
 
    case "listarAnuncios":
-      //--------------------------------------------------------------------------------------
+      
       try{   
          $arrayAnuncio = Anuncio::CreateListar30($pdo);
          header('Content-Type: application/json; charset=utf-8');
@@ -85,6 +84,21 @@ switch ($acao) {
          throw new Exception($e->getMessage());
       }
       break;
+
+   case "criarAnuncio":
+         $nome = $_POST["nome"] ?? "";
+         $telefone = $_POST["telefone"] ?? "";
+         $mensagem = $_POST["mensagem"] ?? "";
+
+         // inserir na tabela
+         Interesse::CreateInteresse($pdo, $nome, $telefone, $mensagem);
+
+         header("location: ../pages/index.html");
+   
+         } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+         }
+         break;
 
       //-----------------------------------------------------------------
    default:
