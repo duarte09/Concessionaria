@@ -54,7 +54,7 @@ switch ($acao) {
             $_SESSION['loggedIn'] = true;
             $_SESSION['user'] = $email;
 
-            header('Location: home.php');
+            header('Location: ../pages/privada/interna.html');
             exit();
         } else {
             // Credenciais inválidas, redireciona para a página de login com erro

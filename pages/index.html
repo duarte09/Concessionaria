@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../images/camaruAzul.png" type="image/png">
     <title>AutoFictício - Anúncios de Veículos</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles/globalStyles.css"/>
-    <link rel="stylesheet" href="../styles/home.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/globalStyles.css" />
+    <link rel="stylesheet" href="../styles/home.css" />
 </head>
+
 <body>
     <div id="header"></div>
     <script>
@@ -20,11 +23,13 @@
             });
     </script>
 
-<main>
-  <div class="main-container">
-      <form class="mb-4">
-          <h1>Encontre o Veículo Perfeito</h1>
-          <div class="form-row">
+    <main>
+        <div class="main-container">
+            <form class="mb-4">
+                <h1>Encontre o Veículo Perfeito</h1>
+                <div class="form-row">
+
+                    <!--
               <div class="form-group col-md-4">
                   <label for="marca">Marca</label>
                   <select id="marca" class="form-control">
@@ -52,45 +57,51 @@
                       <option value="rj">Rio de Janeiro</option>
                   </select>
               </div>
-          </div>
-          <button type="submit" class="btn">Buscar</button>
-      </form>
+              -->
+                </div>
+                <button type="submit" class="btn">Buscar</button>
+            </form>
 
-      <div class="card-container">
-          <div class="card">
-              <img src="../images/car1.jpg" class="card-img-top" alt="Carro 1">
-              <div class="card-body">
-                  <h3 class="card-title">Ford Focus 2018</h3>
-                  <p class="card-location">Belo Horizonte - R$ 50.000</p>
-                  <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
-                  <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
-              </div>
-          </div>
-          <div class="card">
-              <img src="../images/car2.jpg" class="card-img-top" alt="Carro 2">
-              <div class="card-body">
-                  <h2 class="card-title">Chevrolet Camaro 2019</h2>
-                  <p class="card-location">São Paulo - R$ 150.000</p>
-                  <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
-                  <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
-              </div>
-          </div>
-          <div class="card">
-              <img src="../images/car3.jpg" class="card-img-top" alt="Carro 3">
-              <div class="card-body">
-                  <h2 class="card-title">Toyota Corolla 2020</h2>
-                  <p class="card-location">Rio de Janeiro - R$ 80.000</p>
-                  <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
-                  <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
-              </div>
-          </div>
-      </div>
-  </div>
-</main>
+            <div class="card-container">
+                <div id="containerVeiculos" class="row">
+                    <!-- Os cards serão adicionados aqui -->
+                </div>
+                <!--
+                <div class="card">
+                    <img src="../images/car1.jpg" class="card-img-top" alt="Carro 1">
+                    <div class="card-body">
+                        <h3 class="card-title">Ford Focus 2018</h3>
+                        <p class="card-location">Belo Horizonte - R$ 50.000</p>
+                        <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
+                        <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../images/car2.jpg" class="card-img-top" alt="Carro 2">
+                    <div class="card-body">
+                        <h2 class="card-title">Chevrolet Camaro 2019</h2>
+                        <p class="card-location">São Paulo - R$ 150.000</p>
+                        <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
+                        <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../images/car3.jpg" class="card-img-top" alt="Carro 3">
+                    <div class="card-body">
+                        <h2 class="card-title">Toyota Corolla 2020</h2>
+                        <p class="card-location">Rio de Janeiro - R$ 80.000</p>
+                        <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
+                        <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-            crossorigin="anonymous"></script>
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
     <div id="footer"></div>
     <script>
         fetch('footer.html')
@@ -98,6 +109,165 @@
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
             });
+
+        function carregaMarcasDistintas() {
+            var xhr = new XMLHttpRequest();  // Cria uma nova instância de XMLHttpRequest
+            xhr.open('GET', 'get-marcas.php', true);  // Configura a requisição GET para o script 'get-marcas.php'
+
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    var marcas = JSON.parse(xhr.responseText);  // Converte a resposta JSON para um objeto JavaScript
+
+                    var selectMarca = document.getElementById('selectMarca');  // Obtém o elemento select pelo ID
+                    selectMarca.innerHTML = '<option value="">Selecione uma marca</option>';  // Limpa as opções anteriores e adiciona a opção inicial
+
+                    marcas.forEach(function (marca) {
+                        var option = document.createElement('option');
+                        option.value = marca;
+                        option.textContent = marca;
+                        selectMarca.appendChild(option);  // Adiciona a opção ao <select>
+                    });
+                } else {
+                    alert('Erro ao carregar marcas.');  // Exibe um alerta caso a requisição falhe
+                }
+            };
+
+            xhr.onerror = function () {
+                alert('Erro na requisição.');
+            };
+
+            xhr.send();  // Envia a requisição
+        }
+
+        function carregaModelosDaMarca() {
+            var selectMarca = document.getElementById('selectMarca');
+            var marcaSelecionada = selectMarca.value;  // Obtém a marca selecionada pelo usuário
+
+            if (marcaSelecionada) {
+                var xhr = new XMLHttpRequest();  // Cria uma nova instância de XMLHttpRequest
+                xhr.open('GET', 'get-modelos.php?marca=' + encodeURIComponent(marcaSelecionada), true);  // Configura a requisição GET com o parâmetro da marca
+
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        var modelos = JSON.parse(xhr.responseText);  // Converte o retorno JSON para um array de modelos
+
+                        var selectModelo = document.getElementById('selectModelo');
+                        selectModelo.innerHTML = '<option value="">Selecione um modelo</option>';  // Limpa as opções anteriores
+
+                        modelos.forEach(function (modelo) {
+                            var option = document.createElement('option');
+                            option.value = modelo;
+                            option.textContent = modelo;
+                            selectModelo.appendChild(option);  // Adiciona a opção ao <select>
+                        });
+                    } else {
+                        alert('Erro ao carregar modelos.');
+                    }
+                };
+
+                xhr.onerror = function () {
+                    alert('Erro na requisição.');
+                };
+
+                xhr.send();  // Envia a requisição
+            }
+        }
+
+        function carregaVeiculosDoModelo() {
+            var selectModelo = document.getElementById('selectModelo');
+            var modeloSelecionado = selectModelo.value;  // Obtém o modelo selecionado pelo usuário
+
+            if (modeloSelecionado) {
+                var xhr = new XMLHttpRequest();  // Cria uma nova instância de XMLHttpRequest
+                xhr.open('GET', 'get-veiculos.php?modelo=' + encodeURIComponent(modeloSelecionado), true);  // Configura a requisição GET com o parâmetro do modelo
+
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        var veiculos = JSON.parse(xhr.responseText);  // Converte o retorno JSON para um array de veículos
+
+                        var containerVeiculos = document.getElementById('containerVeiculos');
+                        containerVeiculos.innerHTML = '';  // Limpa os cards de veículos existentes
+
+                        veiculos.forEach(function (veiculo) {
+                            var cardDiv = document.createElement('div');
+                            cardDiv.classList.add('card');  // Adiciona a classe 'card' para estilizar o card
+
+                            var img = document.createElement('img');
+                            img.src = veiculo.imagem || "../images/car2.jpg";  // Utiliza a imagem do veículo, se disponível
+                            img.classList.add('card-img-top');
+                            img.alt = 'Foto do veículo';
+                            cardDiv.appendChild(img);
+
+                            var cardBody = document.createElement('div');
+                            cardBody.classList.add('card-body');
+
+                            var cardTitle = document.createElement('h5');
+                            cardTitle.classList.add('card-title');
+                            cardTitle.textContent = `${veiculo.marca} ${veiculo.modelo} ${veiculo.ano}`;
+                            cardBody.appendChild(cardTitle);
+
+                            var cardTextCor = document.createElement('p');
+                            cardTextCor.classList.add('card-text');
+                            cardTextCor.innerHTML = `<strong>Cor:</strong> ${veiculo.cor}`;
+                            cardBody.appendChild(cardTextCor);
+
+                            var cardTextKm = document.createElement('p');
+                            cardTextKm.classList.add('card-text');
+                            cardTextKm.innerHTML = `<strong>Quilometragem:</strong> ${veiculo.km} km`;
+                            cardBody.appendChild(cardTextKm);
+
+                            var cardTextDescricao = document.createElement('p');
+                            cardTextDescricao.classList.add('card-text');
+                            cardTextDescricao.innerHTML = `<strong>Descrição:</strong> ${veiculo.descricao}`;
+                            cardBody.appendChild(cardTextDescricao);
+
+                            var cardTextLocalizacao = document.createElement('p');
+                            cardTextLocalizacao.classList.add('card-text');
+                            cardTextLocalizacao.innerHTML = `<strong>Localização:</strong> ${veiculo.estado}, ${veiculo.cidade}`;
+                            cardBody.appendChild(cardTextLocalizacao);
+
+                            var cardTextValor = document.createElement('p');
+                            cardTextValor.classList.add('card-text');
+                            cardTextValor.innerHTML = `<strong>Valor:</strong> R$ ${veiculo.valor}`;
+                            cardBody.appendChild(cardTextValor);
+
+                            var linkDetalhes = document.createElement('a');
+                            linkDetalhes.href = `./publica/detalheAnuncio.html?id=${veiculo.id}`;
+                            linkDetalhes.classList.add('btn');
+                            linkDetalhes.textContent = 'Detalhes';
+                            cardBody.appendChild(linkDetalhes);
+
+                            var linkInteresse = document.createElement('a');
+                            linkInteresse.href = `./publica/interesse.html?id=${veiculo.id}`;
+                            linkInteresse.classList.add('btn');
+                            linkInteresse.textContent = 'Informe seu interesse';
+                            cardBody.appendChild(linkInteresse);
+
+                            cardDiv.appendChild(cardBody);
+                            containerVeiculos.appendChild(cardDiv);  // Adiciona o card ao container de veículos
+                        });
+                    } else {
+                        alert('Erro ao carregar veículos.');
+                    }
+                };
+
+                xhr.onerror = function () {
+                    alert('Erro na requisição.');
+                };
+
+                xhr.send();
+            }
+        }
+
+
+
     </script>
 </body>
+
 </html>

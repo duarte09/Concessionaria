@@ -63,4 +63,75 @@ class Anuncio
     $arrayAnuncios = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $arrayAnuncios;
     }
+
+    // Buscar marcas
+    static function GetMarcas($pdo)
+    {
+        $stmt = $pdo->prepare(
+            <<<SQL
+            SELECT DISTINCT marca FROM anuncio
+            SQL
+        );
+
+        $stmt->execute();
+        
+        $marcas = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $marcas[] = $row['marca'];
+        }
+
+        if (empty($marcas)) {
+            throw new Exception("Nenhuma marca encontrada");
+        }
+
+        return json_encode($marcas);
+    }
+
+    // Buscar os modelos por marca
+    static function GetModelos($pdo, $marca)
+    {
+        $stmt = $pdo->prepare(
+            <<<SQL
+            SELECT DISTINCT modelo FROM anuncio WHERE marca = ?
+            SQL
+        );
+
+        $stmt->execute([$marca]);
+        
+        $modelos = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $modelos[] = $row['modelo'];
+        }
+
+        if (empty($modelos)) {
+            throw new Exception("Nenhum modelo encontrado para a marca especificada");
+        }
+
+        return json_encode($modelos);
+    }
+
+    // Buscar os veículos por modelo
+    static function GetVeiculos($pdo, $modelo)
+    {
+        $stmt = $pdo->prepare(
+            <<<SQL
+            SELECT modelo, ano, cor, quilometragem FROM anuncio WHERE modelo = ?
+            SQL
+        );
+
+        $stmt->execute([$modelo]);
+        
+        $veiculos = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $veiculos[] = $row;
+        }
+
+        if (empty($veiculos)) {
+            throw new Exception("Nenhum veículo encontrado para o modelo especificado");
+        }
+
+        return json_encode($veiculos);
+    }
 }
+?>
+
