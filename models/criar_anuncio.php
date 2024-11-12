@@ -8,7 +8,6 @@ class Anuncio
         exit;
     }
     
-    $func = $_GET['func'];
 
     static function CreateAnuncio($pdo,
         $marca, $modelo, $ano, $cor, $km, $descricao, $valor,

@@ -96,11 +96,11 @@
                     <div class="card-body">
                         <h2 class="card-title">Toyota Corolla 2020</h2>
                         <p class="card-location">Rio de Janeiro - R$ 80.000</p>
-                        <a href="./publica/detalheAnuncio.html" class="btn">Detalhes</a>
-                        <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
+                        <a href="/pages/publica/detalheAnuncio.html" class="btn">Detalhes</a>
+                        <a href="/pages/privada/interesse.html" class="btn">Informe seu interesse</a>
                     </div>
                 </div>
-            -->
+                -->
             </div>
         </div>
     </main>
@@ -128,7 +128,7 @@
                 if (xhr.status >= 200 && xhr.status < 300) { // Verifica se a resposta foi bem-sucedida
                     var marcas = JSON.parse(xhr.responseText); // Converte a resposta JSON em um array de marcas
 
-                    var selectMarca = document.getElementById('selectMarca'); // Obtém o elemento <select> de marcas
+                    var selectMarca = document.getElementById('marca'); // Obtém o elemento <select> de marcas
                     selectMarca.innerHTML = '<option value="">Selecione</option>'; // Reseta as opções do <select>
 
                     // Adiciona cada marca como uma opção no <select>
@@ -153,7 +153,7 @@
 
         // Função para carregar os modelos da marca selecionada
         function carregaModelosDaMarca() {
-            var selectMarca = document.getElementById('selectMarca');
+            var selectMarca = document.getElementById('marca');
             var marcaSelecionada = selectMarca.value; // Obtém a marca selecionada no <select>
 
             if (marcaSelecionada) { // Verifica se uma marca foi selecionada
@@ -165,7 +165,7 @@
                     if (xhr.status >= 200 && xhr.status < 300) {
                         var modelos = JSON.parse(xhr.responseText); // Converte a resposta JSON em um array de modelos
 
-                        var selectModelo = document.getElementById('selectModelo'); // Obtém o elemento <select> de modelos
+                        var selectModelo = document.getElementById('modelo'); // Obtém o elemento <select> de modelos
                         selectModelo.innerHTML = '<option value="">Selecione</option>'; // Reseta as opções do <select>
 
                         // Adiciona cada modelo como uma opção no <select>
@@ -198,7 +198,7 @@
                 if (xhr.status >= 200 && xhr.status < 300) {
                     var localizacoes = JSON.parse(xhr.responseText); // Converte a resposta JSON em um array de localizações
 
-                    var selectLocalizacao = document.getElementById('selectLocalizacao'); // Obtém o elemento <select> de localizações
+                    var selectLocalizacao = document.getElementById('localizacao'); // Obtém o elemento <select> de localizações
                     selectLocalizacao.innerHTML = '<option value="">Selecione</option>'; // Reseta as opções do <select>
 
                     // Adiciona cada localização como uma opção no <select>
@@ -223,9 +223,9 @@
         // Função para buscar veículos com base nos filtros selecionados: marca, modelo e localização
         function buscarVeiculos() {
             // Obtém os valores dos <select> de marca, modelo e localização
-            var marca = document.getElementById('selectMarca').value;
-            var modelo = document.getElementById('selectModelo').value;
-            var localizacao = document.getElementById('selectLocalizacao').value;
+            var marca = document.getElementById('marca').value;
+            var modelo = document.getElementById('modelo').value;
+            var localizacao = document.getElementById('localizacao').value;
 
             var xhr = new XMLHttpRequest();
             // Configura a requisição GET, incluindo os parâmetros de marca, modelo e localização na URL
