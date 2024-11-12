@@ -2,6 +2,14 @@
 
 class Anuncio
 {
+    if (!isset($_GET['func'])) {
+        http_response_code(400); // Bad Request
+        echo json_encode(['error' => 'Parâmetro "func" é obrigatório']);
+        exit;
+    }
+    
+    $func = $_GET['func'];
+
     static function CreateAnuncio($pdo,
         $marca, $modelo, $ano, $cor, $km, $descricao, $valor,
         $estado, $cidade, $nomearqfoto, $idanunciante)
@@ -110,27 +118,96 @@ class Anuncio
         return json_encode($modelos);
     }
 
-    // Buscar os veículos por modelo
-    static function GetVeiculos($pdo, $modelo)
-    {
-        $stmt = $pdo->prepare(
-            <<<SQL
-            SELECT modelo, ano, cor, quilometragem FROM anuncio WHERE modelo = ?
-            SQL
-        );
+// Buscar as localizações
+public static function GetLocalizacoes($pdo)
+{
+    $stmt = $pdo->prepare(
+        <<<SQL
+        SELECT DISTINCT cidade FROM anuncio
+        SQL    
+    );
+    $stmt->execute();
+    
+    $localizacoes = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $localizacoes[] = $row['cidade'];
+    }
 
-        $stmt->execute([$modelo]);
-        
-        $veiculos = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $veiculos[] = $row;
+    return json_encode($localizacoes);
+}
+
+// Buscar veículos por marca, modelo e localização
+public static function GetVeiculos($pdo, $marca, $modelo, $localizacao)
+{
+    $query = "SELECT marca, modelo, ano, cor, km, descricao, valor, estado, cidade FROM anuncio WHERE 1=1";
+    $params = [];
+
+    if ($marca) {
+        $query .= " AND marca = ?";
+        $params[] = $marca;
+    }
+
+    if ($modelo) {
+        $query .= " AND modelo = ?";
+        $params[] = $modelo;
+    }
+
+    if ($localizacao) {
+        $query .= " AND cidade = ?";
+        $params[] = $localizacao;
+    }
+
+    $stmt = $pdo->prepare($query);
+    $stmt->execute($params);
+    
+    $veiculos = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $veiculos[] = $row;
+    }
+
+    return json_encode($veiculos);
+}
+}
+
+// Executar a função de acordo com o parâmetro 'func'
+try {
+if (!isset($_GET['func'])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Parâmetro "func" é obrigatório']);
+    exit;
+}
+
+$func = $_GET['func'];
+
+switch ($func) {
+    case 'GetMarcas':
+        echo Anuncio::GetMarcas($pdo);
+        break;
+
+    case 'GetModelos':
+        if (!isset($_GET['marca'])) {
+            throw new Exception("Parâmetro 'marca' é obrigatório para GetModelos");
         }
+        echo Anuncio::GetModelos($pdo, $_GET['marca']);
+        break;
 
-        if (empty($veiculos)) {
-            throw new Exception("Nenhum veículo encontrado para o modelo especificado");
+    case 'GetLocalizacoes':
+        echo Anuncio::GetLocalizacoes($pdo);
+        break;
+
+    case 'GetVeiculos':
+        $marca = $_GET['marca'] ?? null;
+        $modelo = $_GET['modelo'] ?? null;
+        $localizacao = $_GET['localizacao'] ?? null;
+        echo Anuncio::GetVeiculos($pdo, $marca, $modelo, $localizacao);
+        break;
+
+    default:
+        throw new Exception("Função desconhecida: $func");
         }
-
-        return json_encode($veiculos);
+    } catch (Exception $e) {
+        http_response_code(400); // Bad Request
+        echo json_encode(['error' => $e->getMessage()]);
     }
 }
 ?>

@@ -16,7 +16,7 @@
 <body>
     <div id="header"></div>
     <script>
-        fetch('headerPublic.html')
+        fetch('/headerPublic.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
@@ -29,43 +29,43 @@
                 <h1>Encontre o Veículo Perfeito</h1>
                 <div class="form-row">
 
-                    
-              <div class="form-group col-md-4">
-                  <label for="marca">Marca</label>
-                  <select id="marca" class="form-control">
-                      <option value="">Selecione</option>
-                      <!--
+
+                    <div class="form-group col-md-4">
+                        <label for="marca">Marca</label>
+                        <select id="marca" class="form-control">
+                            <option value="">Selecione</option>
+                            <!--
                       <option value="ford">Ford</option>
                       <option value="chevrolet">Chevrolet</option>
                       <option value="toyota">Toyota</option>
                     -->
-                  </select>
-              </div>
-              <div class="form-group col-md-4">
-                  <label for="modelo">Modelo</label>
-                  <select id="modelo" class="form-control">
-                      <option value="">Selecione</option>
-                    <!--
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="modelo">Modelo</label>
+                        <select id="modelo" class="form-control">
+                            <option value="">Selecione</option>
+                            <!--
                       <option value="focus">Focus</option>
                       <option value="camaro">Camaro</option>
                       <option value="corolla">Corolla</option>
                     -->
-                  </select>
-              </div>
-              <div class="form-group col-md-4">
-                  <label for="localizacao">Localização</label>
-                  <select id="localizacao" class="form-control">
-                      <option value="">Selecione</option>
-                      <!--
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="localizacao">Localização</label>
+                        <select id="localizacao" class="form-control">
+                            <option value="">Selecione</option>
+                            <!--
                       <option value="bh">Belo Horizonte</option>
                       <option value="sp">São Paulo</option>
                       <option value="rj">Rio de Janeiro</option>
                       -->
-                  </select>
-              </div>
-              
+                        </select>
+                    </div>
+
                 </div>
-                <button type="submit" class="btn">Buscar</button>
+                <button type="submit" class="btn" onclick="buscarVeiculos()">Buscar</button>
             </form>
 
             <div class="card-container">
@@ -100,7 +100,7 @@
                         <a href="./privada/interesse.html" class="btn">Informe seu interesse</a>
                     </div>
                 </div>
-                -->
+            -->
             </div>
         </div>
     </main>
@@ -116,59 +116,64 @@
                 document.getElementById('footer').innerHTML = data;
             });
 
+        // Função para carregar as marcas distintas do banco de dados
         function carregaMarcasDistintas() {
-            var xhr = new XMLHttpRequest();  // Cria uma nova instância de XMLHttpRequest
-            xhr.open('GET', 'get-marcas.php', true);  // Configura a requisição GET para o script 'get-marcas.php'
-
+            // Cria uma nova requisição AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/models/criar_anuncio.php?func=GetMarcas', true); // Configura o método GET para chamar a função GetMarcas no PHP
             xhr.setRequestHeader('Content-Type', 'application/json');
 
+            // Função que será executada quando a resposta da requisição for recebida
             xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    var marcas = JSON.parse(xhr.responseText);  // Converte a resposta JSON para um objeto JavaScript
+                if (xhr.status >= 200 && xhr.status < 300) { // Verifica se a resposta foi bem-sucedida
+                    var marcas = JSON.parse(xhr.responseText); // Converte a resposta JSON em um array de marcas
 
-                    var selectMarca = document.getElementById('selectMarca');  // Obtém o elemento select pelo ID
-                    selectMarca.innerHTML = '<option value="">Selecione uma marca</option>';  // Limpa as opções anteriores e adiciona a opção inicial
+                    var selectMarca = document.getElementById('selectMarca'); // Obtém o elemento <select> de marcas
+                    selectMarca.innerHTML = '<option value="">Selecione</option>'; // Reseta as opções do <select>
 
+                    // Adiciona cada marca como uma opção no <select>
                     marcas.forEach(function (marca) {
                         var option = document.createElement('option');
                         option.value = marca;
                         option.textContent = marca;
-                        selectMarca.appendChild(option);  // Adiciona a opção ao <select>
+                        selectMarca.appendChild(option);
                     });
                 } else {
-                    alert('Erro ao carregar marcas.');  // Exibe um alerta caso a requisição falhe
+                    alert('Erro ao carregar marcas.'); // Exibe um alerta em caso de erro na resposta
                 }
             };
 
+            // Função para tratar erros na requisição (ex.: problemas de conexão)
             xhr.onerror = function () {
                 alert('Erro na requisição.');
             };
 
-            xhr.send();  // Envia a requisição
+            xhr.send(); // Envia a requisição ao servidor
         }
 
+        // Função para carregar os modelos da marca selecionada
         function carregaModelosDaMarca() {
             var selectMarca = document.getElementById('selectMarca');
-            var marcaSelecionada = selectMarca.value;  // Obtém a marca selecionada pelo usuário
+            var marcaSelecionada = selectMarca.value; // Obtém a marca selecionada no <select>
 
-            if (marcaSelecionada) {
-                var xhr = new XMLHttpRequest();  // Cria uma nova instância de XMLHttpRequest
-                xhr.open('GET', 'get-modelos.php?marca=' + encodeURIComponent(marcaSelecionada), true);  // Configura a requisição GET com o parâmetro da marca
-
+            if (marcaSelecionada) { // Verifica se uma marca foi selecionada
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', `/models/criar_anuncio.php?func=GetModelos&marca=${encodeURIComponent(marcaSelecionada)}`, true);
                 xhr.setRequestHeader('Content-Type', 'application/json');
 
                 xhr.onload = function () {
                     if (xhr.status >= 200 && xhr.status < 300) {
-                        var modelos = JSON.parse(xhr.responseText);  // Converte o retorno JSON para um array de modelos
+                        var modelos = JSON.parse(xhr.responseText); // Converte a resposta JSON em um array de modelos
 
-                        var selectModelo = document.getElementById('selectModelo');
-                        selectModelo.innerHTML = '<option value="">Selecione um modelo</option>';  // Limpa as opções anteriores
+                        var selectModelo = document.getElementById('selectModelo'); // Obtém o elemento <select> de modelos
+                        selectModelo.innerHTML = '<option value="">Selecione</option>'; // Reseta as opções do <select>
 
+                        // Adiciona cada modelo como uma opção no <select>
                         modelos.forEach(function (modelo) {
                             var option = document.createElement('option');
                             option.value = modelo;
                             option.textContent = modelo;
-                            selectModelo.appendChild(option);  // Adiciona a opção ao <select>
+                            selectModelo.appendChild(option);
                         });
                     } else {
                         alert('Erro ao carregar modelos.');
@@ -179,97 +184,110 @@
                     alert('Erro na requisição.');
                 };
 
-                xhr.send();  // Envia a requisição
+                xhr.send(); // Envia a requisição ao servidor
             }
         }
 
-        function carregaVeiculosDoModelo() {
-            var selectModelo = document.getElementById('selectModelo');
-            var modeloSelecionado = selectModelo.value;  // Obtém o modelo selecionado pelo usuário
+        // Função para carregar as localizações disponíveis
+        function carregaLocalizacoes() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/models/criar_anuncio.php?func=GetLocalizacoes', true); // Configura o método GET para chamar a função GetLocalizacoes no PHP
+            xhr.setRequestHeader('Content-Type', 'application/json');
 
-            if (modeloSelecionado) {
-                var xhr = new XMLHttpRequest();  // Cria uma nova instância de XMLHttpRequest
-                xhr.open('GET', 'get-veiculos.php?modelo=' + encodeURIComponent(modeloSelecionado), true);  // Configura a requisição GET com o parâmetro do modelo
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    var localizacoes = JSON.parse(xhr.responseText); // Converte a resposta JSON em um array de localizações
 
-                xhr.setRequestHeader('Content-Type', 'application/json');
+                    var selectLocalizacao = document.getElementById('selectLocalizacao'); // Obtém o elemento <select> de localizações
+                    selectLocalizacao.innerHTML = '<option value="">Selecione</option>'; // Reseta as opções do <select>
 
-                xhr.onload = function () {
-                    if (xhr.status >= 200 && xhr.status < 300) {
-                        var veiculos = JSON.parse(xhr.responseText);  // Converte o retorno JSON para um array de veículos
+                    // Adiciona cada localização como uma opção no <select>
+                    localizacoes.forEach(function (localizacao) {
+                        var option = document.createElement('option');
+                        option.value = localizacao;
+                        option.textContent = localizacao;
+                        selectLocalizacao.appendChild(option);
+                    });
+                } else {
+                    alert('Erro ao carregar localizações.');
+                }
+            };
 
-                        var containerVeiculos = document.getElementById('containerVeiculos');
-                        containerVeiculos.innerHTML = '';  // Limpa os cards de veículos existentes
+            xhr.onerror = function () {
+                alert('Erro na requisição.');
+            };
 
-                        veiculos.forEach(function (veiculo) {
-                            var cardDiv = document.createElement('div');
-                            cardDiv.classList.add('card');  // Adiciona a classe 'card' para estilizar o card
-
-                            var img = document.createElement('img');
-                            img.src = veiculo.imagem || "../images/car2.jpg";  // Utiliza a imagem do veículo, se disponível
-                            img.classList.add('card-img-top');
-                            img.alt = 'Foto do veículo';
-                            cardDiv.appendChild(img);
-
-                            var cardBody = document.createElement('div');
-                            cardBody.classList.add('card-body');
-
-                            var cardTitle = document.createElement('h5');
-                            cardTitle.classList.add('card-title');
-                            cardTitle.textContent = `${veiculo.marca} ${veiculo.modelo} ${veiculo.ano}`;
-                            cardBody.appendChild(cardTitle);
-
-                            var cardTextCor = document.createElement('p');
-                            cardTextCor.classList.add('card-text');
-                            cardTextCor.innerHTML = `<strong>Cor:</strong> ${veiculo.cor}`;
-                            cardBody.appendChild(cardTextCor);
-
-                            var cardTextKm = document.createElement('p');
-                            cardTextKm.classList.add('card-text');
-                            cardTextKm.innerHTML = `<strong>Quilometragem:</strong> ${veiculo.km} km`;
-                            cardBody.appendChild(cardTextKm);
-
-                            var cardTextDescricao = document.createElement('p');
-                            cardTextDescricao.classList.add('card-text');
-                            cardTextDescricao.innerHTML = `<strong>Descrição:</strong> ${veiculo.descricao}`;
-                            cardBody.appendChild(cardTextDescricao);
-
-                            var cardTextLocalizacao = document.createElement('p');
-                            cardTextLocalizacao.classList.add('card-text');
-                            cardTextLocalizacao.innerHTML = `<strong>Localização:</strong> ${veiculo.estado}, ${veiculo.cidade}`;
-                            cardBody.appendChild(cardTextLocalizacao);
-
-                            var cardTextValor = document.createElement('p');
-                            cardTextValor.classList.add('card-text');
-                            cardTextValor.innerHTML = `<strong>Valor:</strong> R$ ${veiculo.valor}`;
-                            cardBody.appendChild(cardTextValor);
-
-                            var linkDetalhes = document.createElement('a');
-                            linkDetalhes.href = `./publica/detalheAnuncio.html?id=${veiculo.id}`;
-                            linkDetalhes.classList.add('btn');
-                            linkDetalhes.textContent = 'Detalhes';
-                            cardBody.appendChild(linkDetalhes);
-
-                            var linkInteresse = document.createElement('a');
-                            linkInteresse.href = `./publica/interesse.html?id=${veiculo.id}`;
-                            linkInteresse.classList.add('btn');
-                            linkInteresse.textContent = 'Informe seu interesse';
-                            cardBody.appendChild(linkInteresse);
-
-                            cardDiv.appendChild(cardBody);
-                            containerVeiculos.appendChild(cardDiv);  // Adiciona o card ao container de veículos
-                        });
-                    } else {
-                        alert('Erro ao carregar veículos.');
-                    }
-                };
-
-                xhr.onerror = function () {
-                    alert('Erro na requisição.');
-                };
-
-                xhr.send();
-            }
+            xhr.send(); // Envia a requisição ao servidor
         }
+
+        // Função para buscar veículos com base nos filtros selecionados: marca, modelo e localização
+        function buscarVeiculos() {
+            // Obtém os valores dos <select> de marca, modelo e localização
+            var marca = document.getElementById('selectMarca').value;
+            var modelo = document.getElementById('selectModelo').value;
+            var localizacao = document.getElementById('selectLocalizacao').value;
+
+            var xhr = new XMLHttpRequest();
+            // Configura a requisição GET, incluindo os parâmetros de marca, modelo e localização na URL
+            xhr.open('GET', `/models/criar_anuncio.php?func=GetVeiculos&marca=${encodeURIComponent(marca)}&modelo=${encodeURIComponent(modelo)}&localizacao=${encodeURIComponent(localizacao)}`, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    var veiculos = JSON.parse(xhr.responseText); // Converte a resposta JSON em um array de veículos
+
+                    var containerVeiculos = document.getElementById('containerVeiculos'); // Obtém o container onde os veículos serão exibidos
+                    containerVeiculos.innerHTML = ''; // Limpa o conteúdo do container
+
+                    // Para cada veículo encontrado, cria um card com as informações
+                    veiculos.forEach(function (veiculo) {
+                        var cardDiv = document.createElement('div');
+                        cardDiv.classList.add('card'); // Adiciona a classe 'card' para estilização
+
+                        var img = document.createElement('img');
+                        img.src = veiculo.imagem || "../images/car2.jpg"; // Define a imagem do veículo, se disponível
+                        img.classList.add('card-img-top');
+                        img.alt = 'Foto do veículo';
+                        cardDiv.appendChild(img);
+
+                        var cardBody = document.createElement('div');
+                        cardBody.classList.add('card-body');
+
+                        var cardTitle = document.createElement('h5');
+                        cardTitle.classList.add('card-title');
+                        cardTitle.textContent = `${veiculo.marca} ${veiculo.modelo} ${veiculo.ano}`;
+                        cardBody.appendChild(cardTitle);
+
+                        var cardTextCor = document.createElement('p');
+                        cardTextCor.classList.add('card-text');
+                        cardTextCor.innerHTML = `<strong>Cor:</strong> ${veiculo.cor}`;
+                        cardBody.appendChild(cardTextCor);
+
+                        var cardTextKm = document.createElement('p');
+                        cardTextKm.classList.add('card-text');
+                        cardTextKm.innerHTML = `<strong>Quilometragem:</strong> ${veiculo.quilometragem} km`;
+                        cardBody.appendChild(cardTextKm);
+
+                        cardDiv.appendChild(cardBody);
+                        containerVeiculos.appendChild(cardDiv); // Adiciona o card ao container de veículos
+                    });
+                } else {
+                    alert('Erro ao carregar veículos.');
+                }
+            };
+
+            xhr.onerror = function () {
+                alert('Erro na requisição.');
+            };
+
+            xhr.send(); // Envia a requisição ao servidor
+        }
+
+        // Carrega as marcas e localizações assim que a página é carregada
+        document.addEventListener("DOMContentLoaded", function () {
+            carregaMarcasDistintas(); // Carrega as marcas disponíveis
+            carregaLocalizacoes(); // Carrega as localizações disponíveis
+        });
 
 
 
