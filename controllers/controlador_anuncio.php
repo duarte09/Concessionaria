@@ -67,7 +67,7 @@ switch ($acao) {
          }
 
          // inserir na tabela
-         Anuncio::CreateAnuncio($pdo, $marca, $modelo, $ano, $cor, $km, $descricao, $valor, $estado, $cidade, $nomearqfoto);
+         Anuncio::CreateAnuncio($pdo, $marca, $modelo, $ano, $cor, $km, $descricao, $valor, $datahora, $estado, $cidade, $nomearqfoto);
          header("location: ../pages/publica/criarAnuncio.html"); // ARRUMAR AQUI
 
       } catch (Exception $e) {
