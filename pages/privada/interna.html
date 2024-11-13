@@ -22,24 +22,10 @@
     <div class="btn-container">
       <a href="criarAnuncio.html" class="btn btn-primary">Criar Novo Anúncio</a>
       <a href="meusAnuncios.html" class="btn btn-secondary">Meus Anúncios</a>
-      <button id="btn-logoff" class="btn btn-secondary">Sair</button>
     </div>
   </main>
 
   <div id="footer"></div>
-
-  <script>
-    document.getElementById("btn-logoff").addEventListener("click", function () {
-      fetch("../controller/controlador.php?action=logout")
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        window.location.href = "../../publica/login.html";
-      }
-    })
-    .catch(error => console.error("Erro ao fazer logoff:", error));
-  });
-  </script>
 
   <script>
     fetch('../header.html')
